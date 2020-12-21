@@ -1,4 +1,4 @@
-package com.springsecurity;
+package com.springsecurity.form;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
