@@ -36,10 +36,6 @@ public class SampleController {
         } else {
             model.addAttribute("message", "Hello " + principal.getName());
         }
-
-        Account account = accountRepository.findByUsername(principal.getName());
-        AccountContext.setAccount(account);
-
         sampleService.dashboard();
         return "dashboard";
     }
