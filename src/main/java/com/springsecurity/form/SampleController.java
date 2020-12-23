@@ -1,5 +1,8 @@
 package com.springsecurity.form;
 
+import com.springsecurity.account.Account;
+import com.springsecurity.account.AccountContext;
+import com.springsecurity.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import java.security.Principal;
 public class SampleController {
 
     private final SampleService sampleService;
+    private final AccountRepository accountRepository;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -32,6 +36,10 @@ public class SampleController {
         } else {
             model.addAttribute("message", "Hello " + principal.getName());
         }
+
+        Account account = accountRepository.findByUsername(principal.getName());
+        AccountContext.setAccount(account);
+
         sampleService.dashboard();
         return "dashboard";
     }
