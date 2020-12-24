@@ -3,12 +3,16 @@ package com.springsecurity.form;
 import com.springsecurity.account.Account;
 import com.springsecurity.account.AccountContext;
 import com.springsecurity.account.AccountRepository;
+import com.springsecurity.common.SecurityLogger;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.concurrent.Callable;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,6 +48,18 @@ public class SampleController {
     public String admin(Model model, Principal principal) {
         model.addAttribute("message", "Hello Admin, " + principal.getName());
         return "admin";
+    }
+
+    @GetMapping("/async-handler")
+    @ResponseBody
+    public Callable<String> asyncHandler() {
+        SecurityLogger.log("MVC");
+
+        return () -> {
+            SecurityLogger.log("Callable"); // Thread가 달라도, 동일한 Principal를 참조한다.
+            return "Async Handler";
+        };
+
     }
 
 }
