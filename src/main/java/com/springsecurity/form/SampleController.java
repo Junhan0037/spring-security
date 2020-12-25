@@ -59,7 +59,15 @@ public class SampleController {
             SecurityLogger.log("Callable"); // Thread가 달라도, 동일한 Principal를 참조한다.
             return "Async Handler";
         };
+    }
 
+    @GetMapping("/async-service")
+    @ResponseBody
+    public String asyncService() {
+        SecurityLogger.log("MVC, before async service");
+        sampleService.asyncService();
+        SecurityLogger.log("MVC, after async service");
+        return "Async Service";
     }
 
 }
