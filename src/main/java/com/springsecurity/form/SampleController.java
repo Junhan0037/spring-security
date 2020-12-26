@@ -1,11 +1,8 @@
 package com.springsecurity.form;
 
-import com.springsecurity.account.Account;
-import com.springsecurity.account.AccountContext;
 import com.springsecurity.account.AccountRepository;
 import com.springsecurity.common.SecurityLogger;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
