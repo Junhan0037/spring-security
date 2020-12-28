@@ -39,8 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .expressionHandler(expressionHandler());
-        http.formLogin();
+        http.formLogin()
+                .loginPage("/login").permitAll();
         http.httpBasic();
+
+        http.logout().logoutSuccessUrl("/");
 
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL); // 하위 스레드에 SecurityContextHolder 공유
     }
